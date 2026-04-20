@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CritiCloud B.V.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07080f;--bg2:#0e1018;--bg3:#13151f;
+  --orange:#f47920;--orange2:#ff9340;--orange3:#ffa85c;
+  --text:#eef0f6;--muted:#7b8499;--border:rgba(255,255,255,0.07);
+  --card:rgba(255,255,255,0.04);--teal:#1dd6a4;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(7,8,15,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.logo-nav{display:flex;align-items:center;gap:10px}
+.logo-circle{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--orange2));display:flex;align-items:center;justify-content:center}
+.logo-circle svg{width:20px;height:20px}
+.logo-text{font-size:20px;font-weight:800;letter-spacing:.01em;color:#fff}
+.logo-text span{color:var(--orange)}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-btn{background:var(--orange);color:#fff;border:none;padding:9px 22px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s;letter-spacing:.02em}
+.nav-btn:hover{background:var(--orange2)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(244,121,32,0.13) 0%,transparent 70%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(29,214,164,0.07) 0%,transparent 60%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:780px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(244,121,32,.12);border:1px solid rgba(244,121,32,.3);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--orange);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2rem}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-.02em}
+.hero h1 .orange{color:var(--orange)}
+.hero h1 .teal{color:var(--teal)}
+.hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:600px;margin:0 auto 2.5rem}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--orange);color:#fff;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .2s;letter-spacing:.02em}
+.btn-primary:hover{background:var(--orange2);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--text);padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.05)}
+.hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:4rem;flex-wrap:wrap}
+.hstat{text-align:center}
+.hstat-num{font-size:2rem;font-weight:800;color:var(--orange)}
+.hstat-lbl{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:.04em;text-transform:uppercase}
+
+/* SECTIONS */
+section{padding:5rem 2.5rem;max-width:1100px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;margin-bottom:1rem;letter-spacing:-.01em}
+.section-sub{font-size:1rem;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:3rem}
+hr.divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* PILLARS */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:5rem}
+.pillar{background:var(--bg2);padding:2rem 1.5rem;transition:background .2s}
+.pillar:hover{background:var(--bg3)}
+.pillar-icon{font-size:28px;margin-bottom:1rem}
+.pillar h3{font-size:15px;font-weight:700;margin-bottom:.5rem;color:var(--text)}
+.pillar p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.svc-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.75rem;transition:all .25s;position:relative;overflow:hidden}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.svc-card:hover{border-color:rgba(244,121,32,.3);transform:translateY(-4px)}
+.svc-card:hover::before{transform:scaleX(1)}
+.svc-icon{width:46px;height:46px;border-radius:12px;background:rgba(244,121,32,.1);border:1px solid rgba(244,121,32,.2);display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+.svc-icon svg{width:22px;height:22px;stroke:var(--orange);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.svc-card h3{font-size:16px;font-weight:700;margin-bottom:.6rem}
+.svc-card p{font-size:13px;color:var(--muted);line-height:1.65}
+.svc-tag{display:inline-block;margin-top:1rem;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);background:rgba(244,121,32,.1);padding:4px 10px;border-radius:6px}
+
+/* SECTORS */
+.sectors-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sector-item{display:flex;align-items:flex-start;gap:12px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:border-color .2s}
+.sector-item:hover{border-color:rgba(244,121,32,.3)}
+.sector-num{font-size:22px;font-weight:800;color:rgba(244,121,32,.3);line-height:1;flex-shrink:0;min-width:28px}
+.sector-item h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.sector-item p{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* MISSION / VISION */
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1rem}
+.mv-card{border-radius:16px;padding:2rem;position:relative;overflow:hidden}
+.mv-card.mission{background:linear-gradient(135deg,rgba(244,121,32,.15),rgba(244,121,32,.05));border:1px solid rgba(244,121,32,.2)}
+.mv-card.vision{background:linear-gradient(135deg,rgba(29,214,164,.1),rgba(29,214,164,.03));border:1px solid rgba(29,214,164,.2)}
+.mv-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.mv-card.mission .mv-label{color:var(--orange)}
+.mv-card.vision .mv-label{color:var(--teal)}
+.mv-card p{font-size:14px;color:var(--text);line-height:1.75}
+
+/* STRATEGY */
+.strat-list{display:flex;flex-direction:column;gap:12px}
+.strat-row{display:flex;align-items:flex-start;gap:16px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;transition:border-color .2s}
+.strat-row:hover{border-color:rgba(244,121,32,.25)}
+.strat-num{width:32px;height:32px;border-radius:8px;background:rgba(244,121,32,.12);border:1px solid rgba(244,121,32,.2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0}
+.strat-row h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.strat-row p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* SECTORS FULL */
+.sectors-full{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.sec-pill{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-align:center;transition:all .2s}
+.sec-pill:hover{border-color:rgba(244,121,32,.3);transform:translateY(-2px)}
+.sec-pill-icon{font-size:24px;margin-bottom:.6rem}
+.sec-pill span{font-size:13px;font-weight:600;display:block}
+.sec-pill small{font-size:11px;color:var(--muted)}
+
+/* CTA */
+.cta-block{background:linear-gradient(135deg,rgba(244,121,32,.18),rgba(244,121,32,.06));border:1px solid rgba(244,121,32,.25);border-radius:24px;padding:4rem 2rem;text-align:center;max-width:1100px;margin:0 auto 5rem}
+.cta-block h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;margin-bottom:1rem}
+.cta-block p{color:var(--muted);margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.cta-detail{font-size:12px;color:var(--muted);margin-top:1rem}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2.5rem 2rem}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem}
+.footer-brand p{font-size:13px;color:var(--muted);margin-top:.75rem;line-height:1.65;max-width:280px}
+.footer-col h4{font-size:13px;font-weight:700;margin-bottom:1rem;color:var(--text)}
+.footer-col a{display:block;font-size:13px;color:var(--muted);text-decoration:none;margin-bottom:.5rem;transition:color .2s}
+.footer-col a:hover{color:var(--orange)}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+
+@media(max-width:640px){
+  .nav-links{display:none}
+  .mv-grid,.sectors-wrap,.footer-inner{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-nav">
+    <div class="logo-circle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z" opacity=".5"/><circle cx="12" cy="12" r="2.5" fill="#fff"/></svg>
+    </div>
+    <div class="logo-text">Criti<span>Cloud</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#diensten">Diensten</a>
+    <a href="#sectoren">Sectoren</a>
+    <a href="#missie">Over ons</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-btn">Aan de slag</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span>Nieuw — Whisper-Fast Hosting is nu live</div>
+    <h1>De cloud die <span class="orange">meegroeit</span> met jouw <span class="teal">ambities</span></h1>
+    <p class="hero-sub">CritiCloud B.V. biedt veilige, betrouwbare en razendsnelle cloud- en IoT-hostingoplossingen voor het MKB. Persoonlijk, flexibel en altijd een stap vooruit.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Bekijk onze diensten</button>
+      <button class="btn-ghost">Neem contact op →</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-num">99.9%</div><div class="hstat-lbl">Uptime garantie</div></div>
+      <div class="hstat"><div class="hstat-num">24/7</div><div class="hstat-lbl">Klantenservice</div></div>
+      <div class="hstat"><div class="hstat-num">ISO</div><div class="hstat-lbl">27001 gecertificeerd</div></div>
+      <div class="hstat"><div class="hstat-num">AVG</div><div class="hstat-lbl">Compliant</div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- PIJLERS -->
+<section>
+  <div style="text-align:center;margin-bottom:2.5rem">
+    <div class="section-label">Onze aanpak</div>
+    <div class="section-title">Vier pijlers. Één visie.</div>
+  </div>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-icon">🚀</div>
+      <h3>Driving IoT Innovation</h3>
+      <p>Voorop lopen met cutting-edge IoT-technologieën die aansluiten bij de unieke behoeften van jouw organisatie.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🔐</div>
+      <h3>Secure &amp; Trusted</h3>
+      <p>Databeveiliging en privacy centraal in alles wat we doen. ISO 27001, AVG-compliant en DDoS-beschermd.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🤝</div>
+      <h3>Adoptief &amp; Persoonlijk</h3>
+      <p>Flexibele, klantgerichte diensten die meegroeien met de veranderende eisen van jouw digitale business.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">⚡</div>
+      <h3>Whisper-Fast Hosting</h3>
+      <p>Supersnelle, schaalbare hostingdiensten voor maximale prestaties van jouw web- en cloudapplicaties.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- DIENSTEN -->
+<section id="diensten">
+  <div class="section-label">Wat wij bieden</div>
+  <div class="section-title">Onze diensten</div>
+  <p class="section-sub">Van cloud hosting tot IoT-integratie — CritiCloud levert de infrastructuur waarmee jouw bedrijf kan groeien en innoveren.</p>
+  <div class="services-grid">
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 0 1 0 9Z"/></svg></div>
+      <h3>Cloud Hosting Services</h3>
+      <p>Betrouwbare en schaalbare cloudoplossingen voor veilig databeheer. Publieke en private cloudomgevingen op maat ingericht.</p>
+      <div class="svc-tag">Core dienst</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+      <h3>IoT Hosting &amp; Integratie</h3>
+      <p>Speciaal ontworpen hostingdiensten voor IoT-apparaten en -netwerken. Real-time dataverwerking en device management.</p>
+      <div class="svc-tag">Specialiteit</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <h3>Managed Services</h3>
+      <p>24/7 beheer van servers, applicaties en netwerken inclusief monitoring en technische ondersteuning. Jij focust op je core business.</p>
+      <div class="svc-tag">Populair</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+      <h3>Dedicated Servers &amp; VPS</h3>
+      <p>Volledige controle over jouw infrastructuur. Dedicated servers en Virtual Private Servers voor maximale performance en flexibiliteit.</p>
+      <div class="svc-tag">Enterprise</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Beveiliging &amp; Compliance</h3>
+      <p>Firewalls, DDoS-bescherming, versleuteling en back-ups. Inclusief ISO 27001 en AVG-ondersteuning voor volledige gemoedsrust.</p>
+      <div class="svc-tag">Essentieel</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-icon"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+      <h3>Whisper-Fast Hosting</h3>
+      <p>Onze vlag-in-top dienst: supersnelle hosting met CDN-integratie voor bedrijven die maximale snelheid eisen van hun applicaties.</p>
+      <div class="svc-tag">⚡ Nieuw</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SECTOREN -->
+<section id="sectoren">
+  <div class="section-label">Wie wij bedienen</div>
+  <div class="section-title">Sectoren binnen het MKB</div>
+  <p class="section-sub">CritiCloud begrijpt de unieke uitdagingen per sector en biedt gerichte oplossingen die écht aansluiten.</p>
+  <div class="sectors-full">
+    <div class="sec-pill"><div class="sec-pill-icon">💡</div><span>Technologie</span><small>Start-ups &amp; scale-ups</small></div>
+    <div class="sec-pill"><div class="sec-pill-icon">🏭</div><span>Productie &amp; Logistiek</span><small>IoT monitoring</small></div>
+    <div class="sec-pill"><div class="sec-pill-icon">🏥</div><span>Gezondheidszorg</span><small>Veilige patiëntdata</small></div>
+    <div class="sec-pill"><div class="sec-pill-icon">🛒</div><span>Retail &amp; E-commerce</span><small>Snelheid &amp; uptime</small></div>
+    <div class="sec-pill"><div class="sec-pill-icon">💼</div><span>Zakelijke dienstverlening</span><small>Procesoptimalisatie</small></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- MISSIE & VISIE -->
+<section id="missie">
+  <div class="section-label">Wie wij zijn</div>
+  <div class="section-title">Missie &amp; Visie</div>
+  <div class="mv-grid" style="margin-bottom:2rem">
+    <div class="mv-card mission">
+      <div class="mv-label">Onze missie</div>
+      <p>Wij streven ernaar om de kracht van de cloud te benutten en IoT-innovatie te stimuleren door veilige, betrouwbare en razendsnelle hostingoplossingen te bieden. Met een persoonlijke en adoptieve aanpak helpen wij klanten om waarde te halen uit hun kritieke data.</p>
+    </div>
+    <div class="mv-card vision">
+      <div class="mv-label">Onze visie</div>
+      <p>Een wereld waarin IoT en cloud-technologie naadloos samenwerken, organisaties verbinden en ondersteunen in een toekomst waar data en snelheid essentieel zijn. Als pionier zetten wij de standaard voor veilige, flexibele en klantgerichte oplossingen.</p>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:3rem">Strategie</div>
+  <div class="section-title" style="margin-bottom:1.5rem">Hoe wij het waarmaken</div>
+  <div class="strat-list">
+    <div class="strat-row">
+      <div class="strat-num">1</div>
+      <div><h4>Driving IoT Innovation</h4><p>Voorop blijven lopen in IoT-technologie door cutting-edge oplossingen te ontwikkelen die aansluiten bij de unieke behoeften van onze klanten.</p></div>
+    </div>
+    <div class="strat-row">
+      <div class="strat-num">2</div>
+      <div><h4>Secure &amp; Trusted</h4><p>Prioriteit geven aan databeveiliging en privacy om vertrouwen te waarborgen in alles wat we doen — van contracten tot certificeringen.</p></div>
+    </div>
+    <div class="strat-row">
+      <div class="strat-num">3</div>
+      <div><h4>Adoptief &amp; Persoonlijk</h4><p>Flexibele en klantgerichte diensten leveren die meegroeien met de veranderende eisen van een digitale economie.</p></div>
+    </div>
+    <div class="strat-row">
+      <div class="strat-num">4</div>
+      <div><h4>Whisper-Fast Hosting</h4><p>Supersnelle, schaalbare hostingdiensten bieden om de groei en prestaties van onze klanten maximaal te ondersteunen.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CTA -->
+<div style="padding:0 2.5rem" id="contact">
+  <div class="cta-block">
+    <div class="section-label" style="text-align:center">Klaar om te starten?</div>
+    <h2>Laten we samen bouwen aan jouw digitale toekomst</h2>
+    <p>Neem contact op met ons team en ontdek hoe CritiCloud jouw bedrijf kan helpen groeien met veilige, snelle en schaalbare cloudoplossingen.</p>
+    <div class="cta-row">
+      <button class="btn-primary">Contact opnemen</button>
+      <button class="btn-ghost">Meer informatie →</button>
+    </div>
+    <div class="cta-detail">📍 Bredasebaan 11, 4744 RZ Bosschenhoofd &nbsp;|&nbsp; 📞 +31 (0)76 700 2060</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-nav" style="margin-bottom:.75rem">
+        <div class="logo-circle"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><circle cx="12" cy="12" r="2.5" fill="#fff"/></svg></div>
+        <div class="logo-text">Criti<span>Cloud</span></div>
+      </div>
+      <p>Driving IoT innovation with secure cloud, critical data, and Whisper-fast hosting.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Diensten</h4>
+      <a href="#">Cloud Hosting</a>
+      <a href="#">IoT Integratie</a>
+      <a href="#">Managed Services</a>
+      <a href="#">Dedicated Servers</a>
+      <a href="#">Beveiliging</a>
+      <a href="#">Whisper-Fast</a>
+    </div>
+    <div class="footer-col">
+      <h4>Bedrijf</h4>
+      <a href="#">Over ons</a>
+      <a href="#">Missie &amp; Visie</a>
+      <a href="#">Sectoren</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacybeleid</a>
+      <a href="#">Algemene voorwaarden</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 CritiCloud B.V. — Alle rechten voorbehouden.</span>
+    <span>KvK-registratie Nederland</span>
+  </div>
+</footer>
+
+</body>
+</html>
